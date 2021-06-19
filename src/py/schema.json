@@ -1,0 +1,566 @@
+{
+    "type": "object",
+    "name": "root",
+    "title": "root",
+    "definitions": {
+        "Compose": {
+            "type": "object",
+            "name": "Compose",
+            "version": 1,
+            "id": 237,
+            "title": "Compose",
+            "typelabel": "Compose",
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "project"
+            ]
+        },
+        "ComposeState": {
+            "type": "object",
+            "name": "ComposeState",
+            "version": 1,
+            "id": 238,
+            "title": "ComposeState",
+            "typelabel": "ComposeState",
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "state"
+            ]
+        },
+        "ComposeHttp": {
+            "type": "object",
+            "name": "ComposeHttp",
+            "version": 1,
+            "id": 239,
+            "title": "ComposeHttp",
+            "typelabel": "ComposeHttp",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "TFTPService": {
+            "type": "object",
+            "name": "TFTPService",
+            "version": 1,
+            "id": 242,
+            "title": "TFTPService",
+            "typelabel": "TFTPService",
+            "properties": {
+                "port": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "configuredMachines": {
+                    "type": "array",
+                    "title": "TFTPService configuredMachines",
+                    "items": {
+                        "$ref": "#/definitions/Machine"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "port"
+            ]
+        },
+        "HTTPService": {
+            "type": "object",
+            "name": "HTTPService",
+            "version": 1,
+            "id": 243,
+            "title": "HTTPService",
+            "typelabel": "HTTPService",
+            "properties": {
+                "port": {
+                    "type": "string"
+                },
+                "defaultPath": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "configuredMachines": {
+                    "type": "array",
+                    "title": "HTTPService configuredMachines",
+                    "items": {
+                        "$ref": "#/definitions/Machine"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "defaultPath",
+                "port"
+            ]
+        },
+        "DnsmasqueDNSService": {
+            "type": "object",
+            "name": "DnsmasqueDNSService",
+            "version": 1,
+            "id": 244,
+            "title": "DnsmasqueDNSService",
+            "typelabel": "DnsmasqueDNSService",
+            "properties": {
+                "server2": {
+                    "type": "string"
+                },
+                "server1": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "domainName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "ResolvesDNSFor": {
+                    "type": "array",
+                    "title": "DnsmasqueDNSService ResolvesDNSFor",
+                    "items": {
+                        "$ref": "#/definitions/ISCDHCPService"
+                    }
+                },
+                "configuredMachines": {
+                    "type": "array",
+                    "title": "DnsmasqueDNSService configuredMachines",
+                    "items": {
+                        "$ref": "#/definitions/Machine"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "domainName",
+                "port",
+                "server1",
+                "server2"
+            ]
+        },
+        "ISCDHCPService": {
+            "type": "object",
+            "name": "ISCDHCPService",
+            "version": 1,
+            "id": 245,
+            "title": "ISCDHCPService",
+            "typelabel": "ISCDHCPService",
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "undiPXEImage": {
+                    "type": "string"
+                },
+                "authoritative": {
+                    "type": "string"
+                },
+                "defaultLeaseTime": {
+                    "type": "string"
+                },
+                "bootPXEImage": {
+                    "type": "string"
+                },
+                "maxLeaseTime": {
+                    "type": "string"
+                },
+                "ipxeAware": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "configuredMachineGroups": {
+                    "type": "array",
+                    "title": "ISCDHCPService configuredMachineGroups",
+                    "items": {
+                        "$ref": "#/definitions/MachineGroup"
+                    }
+                },
+                "subnets": {
+                    "type": "array",
+                    "title": "ISCDHCPService subnets",
+                    "items": {
+                        "$ref": "#/definitions/Subnet"
+                    }
+                },
+                "tftpServices": {
+                    "type": "array",
+                    "title": "ISCDHCPService tftpServices",
+                    "items": {
+                        "$ref": "#/definitions/TFTPService"
+                    }
+                },
+                "dnsServices": {
+                    "type": "array",
+                    "title": "ISCDHCPService dnsServices",
+                    "items": {
+                        "$ref": "#/definitions/DnsmasqueDNSService"
+                    }
+                },
+                "httpServices": {
+                    "type": "array",
+                    "title": "ISCDHCPService httpServices",
+                    "items": {
+                        "$ref": "#/definitions/HTTPService"
+                    }
+                },
+                "configuredMachines": {
+                    "type": "array",
+                    "title": "ISCDHCPService configuredMachines",
+                    "items": {
+                        "$ref": "#/definitions/Machine"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "defaultLeaseTime",
+                "maxLeaseTime",
+                "ipxeAware",
+                "status"
+            ]
+        },
+        "Machine": {
+            "type": "object",
+            "name": "Machine",
+            "version": 1,
+            "id": 246,
+            "title": "Machine",
+            "typelabel": "Machine",
+            "properties": {
+                "diskDevice0": {
+                    "type": "string"
+                },
+                "memory": {
+                    "type": "string"
+                },
+                "diskController0": {
+                    "type": "string"
+                },
+                "diskDevice5": {
+                    "type": "string"
+                },
+                "diskDevice2": {
+                    "type": "string"
+                },
+                "diskDevice7": {
+                    "type": "string"
+                },
+                "diskDevice6": {
+                    "type": "string"
+                },
+                "diskDevice1": {
+                    "type": "string"
+                },
+                "diskDevice4": {
+                    "type": "string"
+                },
+                "ht": {
+                    "type": "string"
+                },
+                "diskController1": {
+                    "type": "string"
+                },
+                "cores": {
+                    "type": "string"
+                },
+                "cpus": {
+                    "type": "string"
+                },
+                "arch": {
+                    "type": "string"
+                },
+                "diskDevice3": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "defaultInterface": {
+                    "type": "array",
+                    "title": "Machine defaultInterface",
+                    "items": {
+                        "$ref": "#/definitions/NetDevice"
+                    }
+                },
+                "configuredInterfaces": {
+                    "type": "array",
+                    "title": "Machine configuredInterfaces",
+                    "items": {
+                        "$ref": "#/definitions/NetDevice"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "arch",
+                "memory",
+                "cpus",
+                "cores",
+                "ht"
+            ]
+        },
+        "MachineGroup": {
+            "type": "object",
+            "name": "MachineGroup",
+            "version": 1,
+            "id": 247,
+            "title": "MachineGroup",
+            "typelabel": "MachineGroup",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "members": {
+                    "type": "array",
+                    "title": "MachineGroup members",
+                    "items": {
+                        "$ref": "#/definitions/Machine"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "description"
+            ]
+        },
+        "NetDevice": {
+            "type": "object",
+            "name": "NetDevice",
+            "version": 1,
+            "id": 248,
+            "title": "NetDevice",
+            "typelabel": "NetDevice",
+            "properties": {
+                "hwaddr": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "addresses": {
+                    "type": "array",
+                    "title": "NetDevice addresses",
+                    "items": {
+                        "$ref": "#/definitions/Ip"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "hwaddr"
+            ]
+        },
+        "Subnet": {
+            "type": "object",
+            "name": "Subnet",
+            "version": 1,
+            "id": 249,
+            "title": "Subnet",
+            "typelabel": "Subnet",
+            "properties": {
+                "rangeStart": {
+                    "type": "string"
+                },
+                "netmask": {
+                    "type": "string"
+                },
+                "network": {
+                    "type": "string"
+                },
+                "routers": {
+                    "type": "string"
+                },
+                "rangeEnd": {
+                    "type": "string"
+                },
+                "nextServer": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "addresses": {
+                    "type": "array",
+                    "title": "Subnet addresses",
+                    "items": {
+                        "$ref": "#/definitions/Ip"
+                    }
+                },
+                "tftpServices": {
+                    "type": "array",
+                    "title": "Subnet tftpServices",
+                    "items": {
+                        "$ref": "#/definitions/TFTPService"
+                    }
+                },
+                "routes": {
+                    "type": "array",
+                    "title": "Subnet routes",
+                    "items": {
+                        "$ref": "#/definitions/Machine"
+                    }
+                }
+            },
+            "required": [
+                "network",
+                "netmask",
+                "rangeStart",
+                "rangeEnd",
+                "routers",
+                "nextServer"
+            ]
+        },
+        "Ip": {
+            "type": "object",
+            "name": "Ip",
+            "version": 1,
+            "id": 250,
+            "title": "Ip",
+            "typelabel": "Ip",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "address"
+            ]
+        },
+        "Zone": {
+            "type": "object",
+            "name": "Zone",
+            "version": 1,
+            "id": 251,
+            "title": "Zone",
+            "typelabel": "Zone",
+            "properties": {
+                "ns": {
+                    "type": "string"
+                },
+                "refresh": {
+                    "type": "string"
+                },
+                "primary": {
+                    "type": "string"
+                },
+                "soa": {
+                    "type": "string"
+                },
+                "TTL": {
+                    "type": "string"
+                },
+                "retry": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "SRV": {
+            "type": "object",
+            "name": "SRV",
+            "version": 1,
+            "id": 252,
+            "title": "SRV",
+            "typelabel": "SRV",
+            "properties": {
+                "service": {
+                    "type": "string"
+                },
+                "weight": {
+                    "type": "string"
+                },
+                "protocol": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "service",
+                "protocol",
+                "priority",
+                "weight",
+                "port"
+            ]
+        },
+        "SOA": {
+            "type": "object",
+            "name": "SOA",
+            "version": 1,
+            "id": 253,
+            "title": "SOA",
+            "typelabel": "SOA",
+            "properties": {
+                "refresh": {
+                    "type": "string"
+                },
+                "primary": {
+                    "type": "string"
+                },
+                "TTL": {
+                    "type": "string"
+                },
+                "retry": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "primary",
+                "refresh",
+                "retry",
+                "TTL"
+            ]
+        }
+    }
+}
