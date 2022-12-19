@@ -55,8 +55,6 @@ class GFSITG(object):
 
     def schema(self):
 
-        print(" ! ")
-
         from gfs.schema.schema import GFSSchema
         from gfs.schema.schema import GFSSchemaDecoder
 
@@ -65,13 +63,7 @@ class GFSITG(object):
         file = open(path, "r")
         data = file.read()
 
-        # print(data)
-
         # GFSSchema.build(json.JSONDecoder.decode(self, data))
         root = GFSSchemaDecoder().decode(data)
-        # print(root)
-
-        print(" !! ")
-        print(root)
 
         return root

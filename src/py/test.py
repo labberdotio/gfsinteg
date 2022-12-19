@@ -87,8 +87,6 @@ class MainTest(unittest.TestCase):
 
         gfs_ns = "gfs1" # os.environ.get("GFS_NAMESPACE", "gfs1")
 
-        print('1')
-
         integration = GFSITG(
 
             gfs_host = gfs_host,
@@ -99,32 +97,46 @@ class MainTest(unittest.TestCase):
             gfs_ns = gfs_ns,
 
         )
-        print(integration)
 
         fullschema = integration.schema()
-        print(" ** ")
-        print(fullschema)
-        print(" ** ")
 
-        fullschema.getName()
-        fullschema.get('name')
+        print( fullschema )
 
-        fullschema.getType()
-        fullschema.get('type')
+        print( fullschema.getName() )
+        print( fullschema.get('name') )
+        print( fullschema.name )
 
-        fullschema.getDefinitions()
-        fullschema.get('definitions')
+        print( fullschema.getType() )
+        print( fullschema.get('type') )
+        print( fullschema.type )
 
-        # # ?
-        # # machineSchema = integration.typeSchema('Machine')
+        # fullschema.getDefinitions()
+        print( fullschema.definitions )
+
+        print( fullschema.get('definitions') )
 
         # machineSchema = fullschema.getDefinitions().getMachine()
         # machineSchema = fullschema.get('definitions').get('Machine')
 
-        # machine = machineSchema.new()
-        # machine = machineSchema.create({
+        print( fullschema.get('definitions').get('Machine') )
+        print( fullschema.definitions.Machine )
+
+        machineSchema = fullschema.definitions.Machine
+
+        # machine = machineSchema.model({
         #     'name': 'new name'
         # })
+        # print( machine )
+
+        machineSchema.validate()
+
+        machine1 = machineSchema.new()
+        machine2 = machineSchema.create({
+            'name': 'new name'
+        })
+
+        print( machine1 )
+        print( machine2 )
 
         # machine = machineSchema.load(1)
         # machine = machineSchema.update(

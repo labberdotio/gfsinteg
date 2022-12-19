@@ -69,7 +69,6 @@ class GFSModelDecoder(json.JSONDecoder):
             import xmltodict
             data = xmltodict.parse(data, postprocessor=postprocessor)
             data = json.dumps(data)
-            # print data
         # Call parent class method
         return json.JSONDecoder.decode(self, data)
 

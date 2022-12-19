@@ -8,7 +8,16 @@
 from __future__ import print_function
 from future.utils import iteritems
 
+# 
+import json
+import simplejson as json
+import jsonschema
+from jsonschema import validate
+# from jsonschema._validators import dependencies
+
 from gfs.common.log import GFSLogger
+
+from gfs.error.error import GFSError
 
 from gfs.model.model import GFSModel
 from gfs.decoder.decoder import GFSModelDecoder
@@ -21,31 +30,27 @@ class GFSBaseSchema(GFSModel):
     logger = GFSLogger.getLogger("GFSBaseSchema")
 
     # def __getattr__(self, attr):
-    #     print(" __getattr__ ")
-    #     print(attr)
     #     return None
 
     # # Gets called when an attribute is accessed
     # def __getattribute__(self, item):
-    #     print(" __getattribute__ ")
-    #     print(item)
-    #     return super(GFSBaseSchema, self).__getattribute__(item)
-    #     # return self.get(item)
+    #     return object.__getattribute__(self, item)
 
-    # # Gets called when the item is not found via __getattribute__
+    # Gets called when the item is not found via __getattribute__
     # def __getattr__(self, item):
-    #     print(" __getattr__ ")
-    #     print(item)
-    #     # return super(GFSBaseSchema, self).__setattr__(item, 'orphan')
-    #     # return self.get(item)
-    #     # return self[item]
     #     return super(GFSBaseSchema, self).__getattr__(item)
-    #     # return getattr(self, item)
 
-    # def get(self, item):
-    #     print(" !! GET !! ")
-    #     print(item)
-    #     return self.attr(item)
+    # def __getattr__(self, name: str):
+    def __getattr__(self, name):
+        if name in self.__dict__:
+            return self.__dict__[name]
+        return None
+
+    def __setattr__(self, name, value):
+        self.__dict__[name] = value
+
+    def get(self, item):
+        return self.attr(item)
 
 
 
@@ -130,10 +135,7 @@ class GFSTypeSchema(GFSSchema, GFSModelDecoder):
         )
 
     def models(self, data):
-        print(" !!! ")
-        print(data)
         m = self.decode(data)
-        print(m)
         return m.get(
             "data", {}
         ).get(
@@ -149,7 +151,48 @@ class GFSTypeSchema(GFSSchema, GFSModelDecoder):
     #     ), 
     #     return decode
 
+    def schema(self):
+        schema = self.__dict__.copy()
+        schema["properties"] = self.__dict__["properties"].__dict__
+        return schema
 
+    def validate(self, **kwargs):
+
+        schema = self.schema()
+
+        instance = kwargs
+        # schema = {}
+        try:
+            # isValid = 
+            validate(
+                instance=instance, 
+                schema=schema
+            )
+
+        # except Exception as e:
+        except jsonschema.exceptions.ValidationError as err:
+
+            raise GFSError(
+                "Failed to validate " + str("self.label()") + 
+                ", with data: " + str(kwargs) + 
+                ", because: " + str(err.message)
+            )
+    
+        except Exception as e:
+
+            raise GFSError(
+                "Failed to validate " + str("self.label()") + 
+                ", with data: " + str(kwargs) + 
+                ", because: " + str(e)
+            )
+    
+        # self.logger.exit("validate", etime)
+
+    def new(self, data = {}):
+        return GFSModel(**data)
+
+    def create(self, data = {}):
+        return GFSModel(**data)
 
 # 
 class GFSSchemaDecoder(GFSModelDecoder):
