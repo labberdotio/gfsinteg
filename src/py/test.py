@@ -80,19 +80,24 @@ class MainTest(unittest.TestCase):
 
         from gfs.integration.integration import GFSITG
 
-        # gfs_ns = "gfs1" # os.environ.get("GFS_NAMESPACE", "gfs1")
         gfs_host = "localhost" # os.environ.get("GFS_HOST", "localhost")
         gfs_port = "5000" # os.environ.get("GFS_PORT", "5000")
         gfs_username = None # os.environ.get("GFS_USERNAME", "root")
         gfs_password = None # os.environ.get("GFS_PASSWORD", "root")
 
+        gfs_ns = "gfs1" # os.environ.get("GFS_NAMESPACE", "gfs1")
+
         print('1')
 
         integration = GFSITG(
+
             gfs_host = gfs_host,
             gfs_port = gfs_port,
             gfs_username = gfs_username,
             gfs_password = gfs_password,
+
+            gfs_ns = gfs_ns,
+
         )
         print(integration)
 

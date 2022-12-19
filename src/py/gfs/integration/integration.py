@@ -16,13 +16,17 @@ class GFSITG(object):
         gfs_username,
         gfs_password,
 
+        gfs_ns,
+
         **kwargs):
         self.configure(
 
-            gfs_host,
-            gfs_port,
-            gfs_username,
-            gfs_password
+            gfs_host = gfs_host,
+            gfs_port = gfs_port,
+            gfs_username = gfs_username,
+            gfs_password = gfs_password,
+
+            gfs_ns = gfs_ns,
 
         )
 
@@ -34,6 +38,8 @@ class GFSITG(object):
         gfs_username,
         gfs_password,
 
+        gfs_ns,
+
         **kwargs):
 
         self.gfs_host = gfs_host
@@ -41,7 +47,7 @@ class GFSITG(object):
         self.gfs_username = gfs_username
         self.gfs_password = gfs_password
 
-        self.api_namespace = "gfs1"
+        self.gfs_ns = gfs_ns
 
         # 
 
