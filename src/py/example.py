@@ -1,48 +1,53 @@
+# 
+# Copyright (c) 2021, 2022, John Grundback
+# All rights reserved.
+# 
 
 from gfs.schema.schema import GFSSchema
 
-
-
     def __init__(
         self,
-
-        gfs_ns,
 
         gfs_host,
         gfs_port,
         gfs_username,
         gfs_password,
+
+        gfs_ns,
 
         **kwargs):
         # super().__init__(**kwargs)
         self._config = None
         self.state = {}
         self.configure(
-            gfs_ns,
-            gfs_host,
-            gfs_port,
-            gfs_username,
-            gfs_password
+
+            gfs_host = gfs_host,
+            gfs_port = gfs_port,
+            gfs_username = gfs_username,
+            gfs_password = gfs_password,
+
+            gfs_ns = gfs_ns,
+
         )
 
     def configure(
         self,
-
-        gfs_ns,
 
         gfs_host,
         gfs_port,
         gfs_username,
         gfs_password,
 
-        **kwargs):
+        gfs_ns,
 
-        self.gfs_ns = gfs_ns
+        **kwargs):
 
         self.gfs_host = gfs_host
         self.gfs_port = gfs_port
         self.gfs_username = gfs_username
         self.gfs_password = gfs_password
+
+        self.gfs_ns = gfs_ns
 
         self.gfs_url = "http://" + self.gfs_host + ":" + self.gfs_port
 
@@ -51,8 +56,6 @@ from gfs.schema.schema import GFSSchema
         self.logger.info(' GremlinFS gfs username: ' + self.gfs_username)
         # self.logger.debug(' GremlinFS gfs password: ' + self.gfs_password)
         self.logger.info(' GremlinFS gfs URL: ' + self.gfs_url)
-
-
 
         return self
 
@@ -64,10 +67,14 @@ gfs_username = os.environ.get("GFS_USERNAME", "root")
 gfs_password = os.environ.get("GFS_PASSWORD", "root")
 
 integration = GFSITG(
+
     gfs_host = gfs_host,
     gfs_port = gfs_port,
     gfs_username = gfs_username,
     gfs_password = gfs_password,
+
+    gfs_ns = gfs_ns,
+
 )
 
 

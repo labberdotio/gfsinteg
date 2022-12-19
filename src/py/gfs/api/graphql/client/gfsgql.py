@@ -1,8 +1,14 @@
-
 # 
-# Copyright (c) 2020, 2021, John Grundback
+# Copyright (c) 2020, 2021, 2022, John Grundback
 # All rights reserved.
 # 
+
+
+import logging
+
+# logging.basicConfig(level=logging.WARNING)
+# logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.DEBUG)
 
 from python_graphql_client import GraphqlClient
 
@@ -11,10 +17,10 @@ from python_graphql_client import GraphqlClient
 # 
 # GFS GraphQL client error class
 # 
-# class GFSGQLError(Exception):
+class GFSGQLError(Exception):
 
-#     def __init__(self, error):
-#         pass
+    def __init__(self, error):
+        pass
 
 
 
@@ -23,7 +29,7 @@ from python_graphql_client import GraphqlClient
 # 
 class GFSGQL():
 
-    logger = GFSLogger.getLogger("GFSGQL")
+    logger = logging.getLogger("GFSGQL")
 
     def __init__(
         self,
@@ -33,16 +39,23 @@ class GFSGQL():
         gfs_username,
         gfs_password,
 
+        gfs_ns,
+
         **kwargs):
+
+        if not gfs_ns:
+            raise GremlinFSAPIError(
+                "No namespace defined"
+            )
 
         self.gfs_host = gfs_host
         self.gfs_port = gfs_port
         self.gfs_username = gfs_username
         self.gfs_password = gfs_password
 
-        self.api_namespace = "gfs1"
+        self.api_namespace = gfs_ns
 
-        self.gfs_gqlurl = "http://" + self.gfs_host + ":" + self.gfs_port + "/" + self.api_namespace + "/" + "graphql"
+        self.gfs_gqlurl = "http://" + self.gfs_host + ":" + self.gfs_port + "/server/" + self.api_namespace + "/" + "graphql"
 
         self.gfs_gqlclient = GraphqlClient(
             endpoint=self.gfs_gqlurl
