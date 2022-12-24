@@ -4,6 +4,11 @@
 # All rights reserved.
 # 
 
+import requests
+
+from gfs.schema.schema import GFSSchema
+from gfs.schema.schema import GFSSchemaDecoder
+
 from gfs.model.factory import GFSModelFactory
 
 
@@ -57,24 +62,24 @@ class GFSITG(object):
 
     def schema(self):
 
-        print(" ! ")
+        # from gfs.schema.schema import GFSSchema
+        # from gfs.schema.schema import GFSSchemaDecoder
 
-        from gfs.schema.schema import GFSSchema
-        from gfs.schema.schema import GFSSchemaDecoder
+        # path = "./src/py/schema.json"
 
-        path = "./src/py/schema.json"
+        # file = open(path, "r")
+        # data = file.read()
 
-        file = open(path, "r")
-        data = file.read()
+        schemaurl = "http://gfs.botcanics.localdomain/api/v1.0/buildkite/schema"
 
-        # print(data)
+        # sending get request and saving the response as response object
+        r = requests.get(url = schemaurl, params = {})
+
+        # extracting data in json format
+        data = r.text # r.json()
 
         # GFSSchema.build(json.JSONDecoder.decode(self, data))
         root = GFSSchemaDecoder().decode(data)
-        # print(root)
-
-        print(" !! ")
-        print(root)
 
         return root
 
