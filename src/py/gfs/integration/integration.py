@@ -4,6 +4,8 @@
 # All rights reserved.
 # 
 
+from gfs.model.factory import GFSModelFactory
+
 
 
 class GFSITG(object):
@@ -75,3 +77,22 @@ class GFSITG(object):
         print(root)
 
         return root
+
+    def factory(self, typename, **kwargs):
+
+        schema = self.schema()
+
+        typeschema = schema.typeschema(typename)
+
+        clazz = type(str(typeschema.name + "Factory"), (GFSModelFactory,object), dict(
+            typeschema = typeschema, 
+            typelabel = typeschema.name, 
+            typelabels = typeschema.name
+        ))
+
+        # print( clazz )
+        # print( clazz.typeschema )
+        # print( clazz.typelabel )
+        # print( clazz.typelabels )
+
+        return clazz(**kwargs)
